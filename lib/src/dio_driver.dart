@@ -10,12 +10,20 @@ class DioDriver extends DriverHttp<Response> {
   DioDriver();
 
   @override
-  Future<Response> get(
-      {required String path, Map<String, dynamic>? headers}) async {
+  Future<Response> get({
+    required String path,
+    Map<String, dynamic>? headers,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
+  }) async {
     _log(method: 'get', path: path, headers: headers);
     return await dio.get(
       path,
-      options: Options(headers: headers),
+      options: Options(
+        headers: headers,
+        sendTimeout: sendTimeout,
+        receiveTimeout: receiveTimeout,
+      ),
     );
   }
 
@@ -24,12 +32,18 @@ class DioDriver extends DriverHttp<Response> {
     required String path,
     required Map<String, dynamic> body,
     Map<String, dynamic>? headers,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
   }) async {
     _log(method: 'put', path: path, headers: headers, body: body);
     return await dio.put(
       path,
       data: body,
-      options: Options(headers: headers),
+      options: Options(
+        headers: headers,
+        sendTimeout: sendTimeout,
+        receiveTimeout: receiveTimeout,
+      ),
     );
   }
 
@@ -38,22 +52,36 @@ class DioDriver extends DriverHttp<Response> {
     required String path,
     required Map<String, dynamic> body,
     Map<String, dynamic>? headers,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
   }) async {
     _log(method: 'post', path: path, headers: headers, body: body);
     return await dio.post(
       path,
       data: body,
-      options: Options(headers: headers),
+      options: Options(
+        headers: headers,
+        sendTimeout: sendTimeout,
+        receiveTimeout: receiveTimeout,
+      ),
     );
   }
 
   @override
-  Future<Response> delete(
-      {required String path, Map<String, dynamic>? headers}) async {
+  Future<Response> delete({
+    required String path,
+    Map<String, dynamic>? headers,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
+  }) async {
     _log(method: 'delete', path: path, headers: headers);
     return await dio.delete(
       path,
-      options: Options(headers: headers),
+      options: Options(
+        headers: headers,
+        sendTimeout: sendTimeout,
+        receiveTimeout: receiveTimeout,
+      ),
     );
   }
 
