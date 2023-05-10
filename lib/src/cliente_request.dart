@@ -1,20 +1,14 @@
-abstract class DriverHttp<T> {
-  Future<T> get({
+import 'package:client_driver/src/response_request_entity.dart';
+
+abstract class ClientRequest {
+  Future<ResponseRequestEntity> get({
     required String path,
     Map<String, dynamic>? headers,
     Duration? sendTimeout,
     Duration? receiveTimeout,
   });
 
-  Future<T> put({
-    required String path,
-    required Map<String, dynamic> body,
-    Map<String, dynamic>? headers,
-    Duration? sendTimeout,
-    Duration? receiveTimeout,
-  });
-
-  Future<T> post({
+  Future<ResponseRequestEntity> put({
     required String path,
     required Map<String, dynamic> body,
     Map<String, dynamic>? headers,
@@ -22,7 +16,15 @@ abstract class DriverHttp<T> {
     Duration? receiveTimeout,
   });
 
-  Future<T> delete({
+  Future<ResponseRequestEntity> post({
+    required String path,
+    required Map<String, dynamic> body,
+    Map<String, dynamic>? headers,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
+  });
+
+  Future<ResponseRequestEntity> delete({
     required String path,
     Map<String, dynamic>? headers,
     Duration? sendTimeout,

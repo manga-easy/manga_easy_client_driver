@@ -3,5 +3,6 @@
 /// More dartdocs go here.
 library client_driver;
 
-export 'src/driver_http.dart';
-export 'src/dio_driver.dart';
+export 'src/cliente_request.dart';
+export 'src/client_dio.dart';
+export 'src/response_request_entity.dart';
