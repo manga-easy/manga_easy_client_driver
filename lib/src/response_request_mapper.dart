@@ -15,16 +15,16 @@ class ResponseRequestMapper {
 
   ResponseRequestEntity fromHttp(http.Response response) {
     return ResponseRequestEntity(
-      data: _convertToMap(response.body),
+      data: _convertToMap(response.bodyBytes),
       statusCode: response.statusCode,
       statusMessage: response.reasonPhrase ?? '',
     );
   }
 
-  Map<String, dynamic> _convertToMap(String body) {
+  Map<String, dynamic> _convertToMap(List<int> body) {
     if (body.isEmpty) {
       return {};
     }
-    return json.decode(body);
+    return json.decode(utf8.decode(body));
   }
 }
