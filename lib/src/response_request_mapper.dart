@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class ResponseRequestMapper {
   ResponseRequestEntity fromDio(dio.Response response) {
     return ResponseRequestEntity(
-      data: response.data,
+      data: _convertToMap(response.data),
       statusCode: response.statusCode ?? 0,
       statusMessage: response.statusMessage ?? '',
     );
@@ -21,10 +21,22 @@ class ResponseRequestMapper {
     );
   }
 
-  Map<String, dynamic> _convertToMap(List<int> body) {
+  Map<String, dynamic> _convertToMap(body) {
     if (body.isEmpty) {
       return {};
     }
-    return json.decode(utf8.decode(body));
+    if (body is List<int>) {
+      //Bovino penso que era assim
+      final result = json.decode(utf8.decode(body));
+      if (result is List) {
+        return {'data': result};
+      }
+      return result;
+    }
+
+    if (body is List) {
+      return {'data': body};
+    }
+    return body;
   }
 }
