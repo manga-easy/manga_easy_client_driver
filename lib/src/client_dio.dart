@@ -45,7 +45,7 @@ class ClientDio extends ClientRequest {
   @override
   Future<ResponseRequestEntity> put({
     required String path,
-    required Map<String, dynamic> body,
+    required Map<String, dynamic>? body,
     Map<String, dynamic>? headers,
     Duration? sendTimeout,
     Duration? receiveTimeout,
@@ -76,7 +76,7 @@ class ClientDio extends ClientRequest {
   @override
   Future<ResponseRequestEntity> post({
     required String path,
-    required Map<String, dynamic> body,
+    required Map<String, dynamic>? body,
     Map<String, dynamic>? headers,
     Duration? sendTimeout,
     Duration? receiveTimeout,
