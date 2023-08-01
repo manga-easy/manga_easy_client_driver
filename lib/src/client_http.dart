@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:client_driver/src/cliente_request.dart';
 import 'package:client_driver/src/response_request_mapper.dart';
 import 'package:client_driver/src/response_request_entity.dart';
 import 'package:http/http.dart' as http;
+import 'dart:developer' as dev;
 
 class ClientHttp extends ClientRequest {
   final ResponseRequestMapper _responseRequestMapper = ResponseRequestMapper();
@@ -125,14 +125,14 @@ class ClientHttp extends ClientRequest {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? body,
   }) {
-    debugger(
-      message:
-          '=============================== INICIO ==============================\n'
-          '=============== Method: $method \n'
-          '=============== Path: $path \n'
-          '=============== Body: ${json.encode(body)} \n'
-          '=============== Headers: ${json.encode(headers)} \n'
-          '============================= FIM ================================\n',
+    dev.log(
+      '=============================== INICIO ==============================\n'
+      '=============== Method: $method \n'
+      '=============== Path: $path \n'
+      '=============== Body: ${json.encode(body)} \n'
+      '=============== Headers: ${json.encode(headers)} \n'
+      '============================= FIM ================================\n',
+      time: DateTime.now(),
     );
   }
 
