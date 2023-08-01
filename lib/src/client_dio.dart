@@ -32,7 +32,7 @@ class ClientDio extends ClientRequest {
       );
 
       return _responseRequestMapper.fromDio(result);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ResponseRequestEntity(
         data: e.response?.data ?? {},
         statusCode: e.response?.statusCode ?? 0,
@@ -63,7 +63,7 @@ class ClientDio extends ClientRequest {
         ),
       );
       return _responseRequestMapper.fromDio(result);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ResponseRequestEntity(
         data: e.response?.data ?? {},
         statusCode: e.response?.statusCode ?? 0,
@@ -94,7 +94,7 @@ class ClientDio extends ClientRequest {
       );
 
       return _responseRequestMapper.fromDio(result);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ResponseRequestEntity(
         data: e.response?.data ?? {},
         statusCode: e.response?.statusCode ?? 0,
@@ -123,7 +123,7 @@ class ClientDio extends ClientRequest {
       );
 
       return _responseRequestMapper.fromDio(result);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ResponseRequestEntity(
         data: e.response?.data ?? {},
         statusCode: e.response?.statusCode ?? 0,

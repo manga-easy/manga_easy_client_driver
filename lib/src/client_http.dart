@@ -140,6 +140,7 @@ class ClientHttp extends ClientRequest {
     if (headers == null) {
       return null;
     }
+    //TODO: Melhorar essa sobre escrita do tipo
     headers['Content-Type'] = 'application/json';
     return Map.from(headers);
   }
