@@ -1,14 +1,12 @@
 import 'dart:convert';
-
+import 'dart:developer';
 import 'package:client_driver/src/cliente_request.dart';
 import 'package:client_driver/src/response_request_mapper.dart';
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 import 'package:client_driver/src/response_request_entity.dart';
 
 class ClientDio extends ClientRequest {
   final ResponseRequestMapper _responseRequestMapper = ResponseRequestMapper();
-  final _logger = Logger();
   final Dio _dio = Dio();
 
   ClientDio();
@@ -139,13 +137,14 @@ class ClientDio extends ClientRequest {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? body,
   }) {
-    _logger.d(
-      '=============================== INICIO ==============================\n'
-      '=============== Method: $method \n'
-      '=============== Path: $path \n'
-      '=============== Body: ${json.encode(body)} \n'
-      '=============== Headers: ${json.encode(headers)} \n'
-      '============================= FIM ================================\n',
+    debugger(
+      message:
+          '=============================== INICIO ==============================\n'
+          '=============== Method: $method \n'
+          '=============== Path: $path \n'
+          '=============== Body: ${json.encode(body)} \n'
+          '=============== Headers: ${json.encode(headers)} \n'
+          '============================= FIM ================================\n',
     );
   }
 }
