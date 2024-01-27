@@ -18,14 +18,21 @@ class ClientHttp extends ClientRequest {
     Duration? receiveTimeout,
   }) async {
     try {
-      _log(method: 'get', path: path, headers: headers);
       final result = await http
           .get(
             Uri.parse(path),
             headers: _validHeaders(headers),
           )
           .timeout(receiveTimeout ?? Duration(seconds: 10));
-
+      _log(
+        method: 'get',
+        path: path,
+        headers: headers,
+        responseStatus: result.statusCode.toString(),
+        responsebody: json.decode(
+          result.body,
+        ),
+      );
       return _responseRequestMapper.fromHttp(result);
     } catch (e) {
       return ResponseRequestEntity(
@@ -45,8 +52,6 @@ class ClientHttp extends ClientRequest {
     Duration? receiveTimeout,
   }) async {
     try {
-      _log(method: 'put', path: path, headers: headers, body: body);
-
       final result = await http
           .put(
             Uri.parse(path),
@@ -54,7 +59,16 @@ class ClientHttp extends ClientRequest {
             body: json.encode(body),
           )
           .timeout(receiveTimeout ?? Duration(seconds: 10));
-
+      _log(
+        method: 'put',
+        path: path,
+        headers: headers,
+        body: body,
+        responseStatus: result.statusCode.toString(),
+        responsebody: json.decode(
+          result.body,
+        ),
+      );
       return _responseRequestMapper.fromHttp(result);
     } catch (e) {
       return ResponseRequestEntity(
@@ -74,7 +88,6 @@ class ClientHttp extends ClientRequest {
     Duration? receiveTimeout,
   }) async {
     try {
-      _log(method: 'post', path: path, headers: headers, body: body);
       final result = await http
           .post(
             Uri.parse(path),
@@ -82,7 +95,16 @@ class ClientHttp extends ClientRequest {
             body: json.encode(body),
           )
           .timeout(receiveTimeout ?? Duration(seconds: 10));
-
+      _log(
+        method: 'post',
+        path: path,
+        headers: headers,
+        body: body,
+        responseStatus: result.statusCode.toString(),
+        responsebody: json.decode(
+          result.body,
+        ),
+      );
       return _responseRequestMapper.fromHttp(result);
     } catch (e) {
       return ResponseRequestEntity(
@@ -101,14 +123,21 @@ class ClientHttp extends ClientRequest {
     Duration? receiveTimeout,
   }) async {
     try {
-      _log(method: 'delete', path: path, headers: headers);
       final result = await http
           .delete(
             Uri.parse(path),
             headers: _validHeaders(headers),
           )
           .timeout(receiveTimeout ?? Duration(seconds: 10));
-
+      _log(
+        method: 'delete',
+        path: path,
+        headers: headers,
+        responseStatus: result.statusCode.toString(),
+        responsebody: json.decode(
+          result.body,
+        ),
+      );
       return _responseRequestMapper.fromHttp(result);
     } catch (e) {
       return ResponseRequestEntity(
@@ -124,13 +153,17 @@ class ClientHttp extends ClientRequest {
     required String path,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? body,
+    Map<String, dynamic>? responsebody,
+    required String responseStatus,
   }) {
     dev.log(
-      '=============================== INICIO ==============================\n'
+      '=============================== Request ==============================\n'
       '=============== Method: $method \n'
       '=============== Path: $path \n'
       '=============== Body: ${json.encode(body)} \n'
       '=============== Headers: ${json.encode(headers)} \n'
+      '=============== ResponseBody: ${json.encode(responsebody)} \n'
+      '=============== ResponseStatus: $responseStatus \n'
       '============================= FIM ================================\n',
       time: DateTime.now(),
     );
